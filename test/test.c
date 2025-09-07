@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
 
     unsigned int size = sizeof(v1)/sizeof(float);
 
-    for (int i = 0; i < size; ++i) {
+    for (unsigned i = 0; i < size; ++i) {
         printf("v1[%d]: %f v2[%d]: %f\n", i, v1[i], i, v2[i]);
     }
     
@@ -30,67 +30,67 @@ int main(int argc, char** argv) {
     _vec_norm(norm_result, v1, size);
 
     printf("_vec_add results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", aresult[i]);
     }
 
     printf("_vec_sub results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", sresult[i]);
     }
 
     printf("_vec_mul results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", mresult[i]);
     }
 
     printf("_vec_div results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", dresult[i]);
     }
 
     printf("_vec_max results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", max_result[i]);
     }
 
     printf("_vec_min results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", min_result[i]);
     }
 
     printf("_vec_sadd results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", sadd_result[i]);
     }
 
     printf("_vec_ssub results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", ssub_result[i]);
     }
 
     printf("_vec_smul results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", smul_result[i]);
     }
     
     printf("_vec_sdiv results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", sdiv_result[i]);
     }
 
     printf("_vec_neg results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", neg_result[i]);
     }
 
     printf("_vec_abs results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", abs_result[i]);
     }
 
     printf("_vec_norm results:\n");
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         printf("%f\n", norm_result[i]);
     }
 

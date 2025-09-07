@@ -1,26 +1,25 @@
 CC=clang
 ASM=nasm
-OBJS=./build/vml/vml.s.o
+OBJS=./build/vml.s.o
 OS := $(shell uname -s)
 
 ifeq ($(OS), Darwin)
-    CFLAGS := -dynamiclib
-	AFLAGS := -fmacho64
 	LIB := libvml.dylib
-else ifeq ($(OS), Linux)        
-    CFLAGS := -shared
+    CFLAGS := -dynamiclib -Wl,-install_name,@loader_path/../build/$(LIB)
+	AFLAGS := -fmacho64
+else ifeq ($(OS), Linux)
+	LIB := libvml.so        
+    CFLAGS += -shared
 	AFLAGS := -felf64
-	LIB := libvml.so
 endif
 
-all: ./bin/$(LIB)
+all: ./build/$(LIB)
 
-./bin/$(LIB): ./build/vml/vml.s.o
-	$(CC) ./build/vml/vml.s.o $(CFLAGS) -o ./bin/$(LIB)
+./build/$(LIB): ./build/vml.s.o
+	$(CC) ./build/vml.s.o $(CFLAGS) -o ./build/$(LIB)
 
-./build/vml/vml.s.o: ./src/vml.s
-	$(ASM) $(AFLAGS) ./src/vml.s -o ./build/vml/vml.s.o
+./build/vml.s.o: ./src/vml.s
+	$(ASM) $(AFLAGS) ./src/vml.s -o ./build/vml.s.o
 
 clean:
-	rm -rf ./bin/*
-	rm -rf $(OBJS)
+	rm -rf ./build/$(LIB) $(OBJS)
