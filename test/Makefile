@@ -9,7 +9,7 @@ TARGET_BENCH = benchmark
 
 all: $(TARGET_TEST) $(TARGET_BENCH)
 
-$(TARGET_TEST): $(SRC_TEST) cu.c
+$(TARGET_TEST): $(SRC_TEST) mt.c
 	$(CC) $(CFLAGS) -o $@ $^ -I../include -L../build -lvml
 
 $(TARGET_BENCH): $(SRC_BENCH)

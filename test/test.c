@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
-#include "cu.h"
+#include "mt.h"
 #include "../include/vml.h"
 
 static float v1[] = {3.0, 7.0, 9.0, 10.0};
@@ -169,29 +169,32 @@ TEST_FUNC(_vec_dot) {
 }
 
 int main(int argc, char** argv) {
-    CUSuite* testSuite = cuAddSuite();
+    mtInitRegistry();
+
+    MTSuite* testSuite = mtAddSuite("GeneralTestSuite");
+    MTSuite* dotSuite = mtAddSuite("DotSuite");
     
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_add));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_sub));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_mul));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_div));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_max));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_min));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_sadd));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_ssub));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_smul));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_sdiv));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_neg));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_abs));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_norm));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_len));
-    cuAddTest(testSuite, TEST_FUNC_NAME(_vec_dot));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_add));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sub));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_mul));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_div));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_max));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_min));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sadd));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_ssub));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_smul));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sdiv));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_neg));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_abs));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_norm));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_len));
+    mtAddTest(dotSuite, TEST_FUNC_NAME(_vec_dot));
 
     
     printf("Running tests...\n");
-    cuRunTests();
+    mtRunAllTests();
     
-    cuCleanupRegistry();
+    mtCleanupRegistry();
 
     return 0;
 }

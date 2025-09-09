@@ -1,5 +1,5 @@
-#ifndef CU_H
-#define CU_H
+#ifndef MT_H
+#define MT_H
 
 #include <stddef.h>
 
@@ -23,12 +23,15 @@ typedef void (*test_func)();
 typedef struct {
     size_t count;
     size_t capacity;
+    const char* name;
     test_func* tests;
-} CUSuite;
+} MTSuite;
 
-void cuRunTests();
-CUSuite* cuAddSuite();
-void cuAddTest(CUSuite* suit, test_func fptr);
-void cuCleanupRegistry();
+void mtInitRegistry();
+void mtRunAllTests();
+void mtRunSuiteTests(const char* name);
+MTSuite* mtAddSuite(const char* name);
+void mtAddTest(MTSuite* suit, test_func fptr);
+void mtCleanupRegistry();
 
 #endif
