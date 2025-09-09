@@ -5,9 +5,11 @@ SRC_BENCH = benchmark.c
 TARGET_TEST = test
 TARGET_BENCH = benchmark
 
+
+
 all: $(TARGET_TEST) $(TARGET_BENCH)
 
-$(TARGET_TEST): $(SRC_TEST)
+$(TARGET_TEST): $(SRC_TEST) cu.c
 	$(CC) $(CFLAGS) -o $@ $^ -I../include -L../build -lvml
 
 $(TARGET_BENCH): $(SRC_BENCH)
