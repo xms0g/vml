@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     unsigned int size = sizeof(v1)/sizeof(float);
     
     start = clock();
-    for (int i = 0; i < size; ++i) {
+    for (unsigned i = 0; i < size; ++i) {
         result[i] = v1[i] + v2[i];
     }
     elapsed = (double)((clock() - start)) / CLOCKS_PER_SEC;
