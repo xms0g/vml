@@ -4,7 +4,6 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <math.h>
-#include <float.h>
 
 #define EXPECT_FLOAT_EQ(result, expected, func_name) \
     do { \
