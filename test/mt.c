@@ -23,7 +23,6 @@ void mtRunAllTests() {
         for (size_t j = 0; j < currentSuite.count; j++) {
             currentSuite.tests[j]();
         }
-        
     }
 
     printf("All tests passed!\n");
@@ -31,15 +30,16 @@ void mtRunAllTests() {
 
 void mtRunSuiteTests(const char* name) {
    for (size_t i = 0; i < registry.count; i++) {
-        if (strcmp(registry.suites[i].name, name))
+        MTSuite currentSuite = registry.suites[i];
+        
+        if (strcmp(currentSuite.name, name))
             continue;
         
-        for (size_t j = 0; j < registry.suites[i].count; j++) {
-            registry.suites[i].tests[j]();
+        for (size_t j = 0; j < currentSuite.count; j++) {
+            currentSuite.tests[j]();
         }
 
         break;
-        
     }
 }
 
