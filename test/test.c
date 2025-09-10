@@ -13,10 +13,10 @@ TEST_FUNC(_vec_add) {
     
     _vec_add(result, v1, v2, 4);
 
-    ASSERT_EQUAL(result[0], 5.0, "_vec_add");
-    ASSERT_EQUAL(result[1], 11.0, "_vec_add");
-    ASSERT_EQUAL(result[2], 17.0, "_vec_add");
-    ASSERT_EQUAL(result[3], 15.0, "_vec_add");
+    EXPECT_FLOAT_EQ(result[0], 5.0f, "_vec_add");
+    EXPECT_FLOAT_EQ(result[1], 11.0f, "_vec_add");
+    EXPECT_FLOAT_EQ(result[2], 17.0f, "_vec_add");
+    EXPECT_FLOAT_EQ(result[3], 15.0f, "_vec_add");
 }
 
 TEST_FUNC(_vec_sub) {
@@ -24,10 +24,10 @@ TEST_FUNC(_vec_sub) {
     
     _vec_sub(result, v1, v2, 4);
 
-    ASSERT_EQUAL(result[0], 1.0, "_vec_sub");
-    ASSERT_EQUAL(result[1], 3.0, "_vec_sub");
-    ASSERT_EQUAL(result[2], 1.0, "_vec_sub");
-    ASSERT_EQUAL(result[3], 5.0, "_vec_sub");
+    EXPECT_FLOAT_EQ(result[0], 1.0f, "_vec_sub");
+    EXPECT_FLOAT_EQ(result[1], 3.0f, "_vec_sub");
+    EXPECT_FLOAT_EQ(result[2], 1.0f, "_vec_sub");
+    EXPECT_FLOAT_EQ(result[3], 5.0f, "_vec_sub");
 
 }
 
@@ -36,10 +36,10 @@ TEST_FUNC(_vec_mul) {
     
     _vec_mul(result, v1, v2, 4);
 
-    ASSERT_EQUAL(result[0], 6.0, "_vec_mul");
-    ASSERT_EQUAL(result[1], 28.0, "_vec_mul");
-    ASSERT_EQUAL(result[2], 72.0, "_vec_mul");
-    ASSERT_EQUAL(result[3], 50.0, "_vec_mul");
+    EXPECT_FLOAT_EQ(result[0], 6.0f, "_vec_mul");
+    EXPECT_FLOAT_EQ(result[1], 28.0f, "_vec_mul");
+    EXPECT_FLOAT_EQ(result[2], 72.0f, "_vec_mul");
+    EXPECT_FLOAT_EQ(result[3], 50.0f, "_vec_mul");
 }
 
 TEST_FUNC(_vec_div) {
@@ -47,10 +47,10 @@ TEST_FUNC(_vec_div) {
     
     _vec_div(result, v1, v2, 4);
 
-    ASSERT_EQUAL(result[0], 1.5, "_vec_div");
-    ASSERT_EQUAL(result[1], 1.75, "_vec_div");
-    ASSERT_EQUAL(result[2], 1.125, "_vec_div");
-    ASSERT_EQUAL(result[3], 2.0, "_vec_div");
+    EXPECT_FLOAT_EQ(result[0], 1.5f, "_vec_div");
+    EXPECT_FLOAT_EQ(result[1], 1.75f, "_vec_div");
+    EXPECT_FLOAT_EQ(result[2], 1.125f, "_vec_div");
+    EXPECT_FLOAT_EQ(result[3], 2.0f, "_vec_div");
 }
 
 TEST_FUNC(_vec_max) {
@@ -58,10 +58,10 @@ TEST_FUNC(_vec_max) {
     
     _vec_max(result, v1, v2, 4);
 
-    ASSERT_EQUAL(result[0], 3.0, "_vec_max");
-    ASSERT_EQUAL(result[1], 7.0, "_vec_max");
-    ASSERT_EQUAL(result[2], 9.0, "_vec_max");
-    ASSERT_EQUAL(result[3], 10.0, "_vec_max");
+    EXPECT_FLOAT_EQ(result[0], 3.0f, "_vec_max");
+    EXPECT_FLOAT_EQ(result[1], 7.0f, "_vec_max");
+    EXPECT_FLOAT_EQ(result[2], 9.0f, "_vec_max");
+    EXPECT_FLOAT_EQ(result[3], 10.0f, "_vec_max");
 }
 
 TEST_FUNC(_vec_min) {
@@ -69,10 +69,10 @@ TEST_FUNC(_vec_min) {
     
     _vec_min(result, v1, v2, 4);
 
-    ASSERT_EQUAL(result[0], 2.0, "_vec_min");
-    ASSERT_EQUAL(result[1], 4.0, "_vec_min");
-    ASSERT_EQUAL(result[2], 8.0, "_vec_min");
-    ASSERT_EQUAL(result[3], 5.0, "_vec_min");
+    EXPECT_FLOAT_EQ(result[0], 2.0f, "_vec_min");
+    EXPECT_FLOAT_EQ(result[1], 4.0f, "_vec_min");
+    EXPECT_FLOAT_EQ(result[2], 8.0f, "_vec_min");
+    EXPECT_FLOAT_EQ(result[3], 5.0f, "_vec_min");
 }
 
 TEST_FUNC(_vec_sadd) {
@@ -80,10 +80,10 @@ TEST_FUNC(_vec_sadd) {
     
     _vec_sadd(result, v1, 10.0, 4);
 
-    ASSERT_EQUAL(result[0], 13.0, "_vec_sadd");
-    ASSERT_EQUAL(result[1], 17.0, "_vec_sadd");
-    ASSERT_EQUAL(result[2], 19.0, "_vec_sadd");
-    ASSERT_EQUAL(result[3], 20.0, "_vec_sadd");
+    EXPECT_FLOAT_EQ(result[0], 13.0f, "_vec_sadd");
+    EXPECT_FLOAT_EQ(result[1], 17.0f, "_vec_sadd");
+    EXPECT_FLOAT_EQ(result[2], 19.0f, "_vec_sadd");
+    EXPECT_FLOAT_EQ(result[3], 20.0f, "_vec_sadd");
 }
 
 TEST_FUNC(_vec_ssub) {
@@ -91,10 +91,10 @@ TEST_FUNC(_vec_ssub) {
     
     _vec_ssub(result, v1, 10.0, 4);
 
-    ASSERT_EQUAL(result[0], -7.0, "_vec_ssub");
-    ASSERT_EQUAL(result[1], -3.0, "_vec_ssub");
-    ASSERT_EQUAL(result[2], -1.0, "_vec_ssub");
-    ASSERT_EQUAL(result[3], 0.0, "_vec_ssub");
+    EXPECT_FLOAT_EQ(result[0], -7.0f, "_vec_ssub");
+    EXPECT_FLOAT_EQ(result[1], -3.0f, "_vec_ssub");
+    EXPECT_FLOAT_EQ(result[2], -1.0f, "_vec_ssub");
+    EXPECT_FLOAT_EQ(result[3], 0.0f, "_vec_ssub");
 }
 
 TEST_FUNC(_vec_smul) {
@@ -102,10 +102,10 @@ TEST_FUNC(_vec_smul) {
     
     _vec_smul(result, v1, 10.0, 4);
 
-    ASSERT_EQUAL(result[0], 30.0, "_vec_smul");
-    ASSERT_EQUAL(result[1], 70.0, "_vec_smul");
-    ASSERT_EQUAL(result[2], 90.0, "_vec_smul");
-    ASSERT_EQUAL(result[3], 100.0, "_vec_smul");
+    EXPECT_FLOAT_EQ(result[0], 30.0f, "_vec_smul");
+    EXPECT_FLOAT_EQ(result[1], 70.0f, "_vec_smul");
+    EXPECT_FLOAT_EQ(result[2], 90.0f, "_vec_smul");
+    EXPECT_FLOAT_EQ(result[3], 100.0f, "_vec_smul");
 }
 
 TEST_FUNC(_vec_sdiv) {
@@ -113,10 +113,10 @@ TEST_FUNC(_vec_sdiv) {
     
     _vec_sdiv(result, v1, 10.0, 4);
 
-    ASSERT_EQUAL(result[0], 0.3, "_vec_sdiv");
-    ASSERT_EQUAL(result[1], 0.7, "_vec_sdiv");
-    ASSERT_EQUAL(result[2], 0.9, "_vec_sdiv");
-    ASSERT_EQUAL(result[3], 1.0, "_vec_sdiv");
+    EXPECT_FLOAT_EQ(result[0], 0.3f, "_vec_sdiv");
+    EXPECT_FLOAT_EQ(result[1], 0.7f, "_vec_sdiv");
+    EXPECT_FLOAT_EQ(result[2], 0.9f, "_vec_sdiv");
+    EXPECT_FLOAT_EQ(result[3], 1.0f, "_vec_sdiv");
 }
 
 TEST_FUNC(_vec_neg) {
@@ -124,10 +124,10 @@ TEST_FUNC(_vec_neg) {
     
     _vec_neg(result, v1, 4);
 
-    ASSERT_EQUAL(result[0], -3.0, "_vec_neg");
-    ASSERT_EQUAL(result[1], -7.0, "_vec_neg");
-    ASSERT_EQUAL(result[2], -9.0, "_vec_neg");
-    ASSERT_EQUAL(result[3], -10.0, "_vec_neg");
+    EXPECT_FLOAT_EQ(result[0], -3.0f, "_vec_neg");
+    EXPECT_FLOAT_EQ(result[1], -7.0f, "_vec_neg");
+    EXPECT_FLOAT_EQ(result[2], -9.0f, "_vec_neg");
+    EXPECT_FLOAT_EQ(result[3], -10.0f, "_vec_neg");
 }
 
 TEST_FUNC(_vec_abs) {
@@ -135,10 +135,10 @@ TEST_FUNC(_vec_abs) {
     
     _vec_abs(result, v1, 4);
 
-    ASSERT_EQUAL(result[0], 3.0, "_vec_abs");
-    ASSERT_EQUAL(result[1], 7.0, "_vec_abs");
-    ASSERT_EQUAL(result[2], 9.0, "_vec_abs");
-    ASSERT_EQUAL(result[3], 10.0, "_vec_abs");
+    EXPECT_FLOAT_EQ(result[0], 3.0f, "_vec_abs");
+    EXPECT_FLOAT_EQ(result[1], 7.0f, "_vec_abs");
+    EXPECT_FLOAT_EQ(result[2], 9.0f, "_vec_abs");
+    EXPECT_FLOAT_EQ(result[3], 10.0f, "_vec_abs");
 }
 
 TEST_FUNC(_vec_norm) {
@@ -146,10 +146,10 @@ TEST_FUNC(_vec_norm) {
     
     _vec_norm(result, v1, 4);
 
-    ASSERT_EQUAL(result[0], 0.194054, "_vec_norm");
-    ASSERT_EQUAL(result[1], 0.452792, "_vec_norm");
-    ASSERT_EQUAL(result[2], 0.582162, "_vec_norm");
-    ASSERT_EQUAL(result[3], 0.646846, "_vec_norm");
+    EXPECT_FLOAT_EQ(result[0], 0.194054f, "_vec_norm");
+    EXPECT_FLOAT_EQ(result[1], 0.452792f, "_vec_norm");
+    EXPECT_FLOAT_EQ(result[2], 0.582162f, "_vec_norm");
+    EXPECT_FLOAT_EQ(result[3], 0.646846f, "_vec_norm");
 }
 
 TEST_FUNC(_vec_len) {
@@ -157,7 +157,7 @@ TEST_FUNC(_vec_len) {
     
     result = _vec_len(v1, 4);
 
-    ASSERT_EQUAL(result, 15.4596, "_vec_len");
+    EXPECT_FLOAT_EQ(result, 15.4596f, "_vec_len");
 }
 
 TEST_FUNC(_vec_dot) {
@@ -165,7 +165,7 @@ TEST_FUNC(_vec_dot) {
     
     result = _vec_dot(v1, v2, 4);
 
-    ASSERT_EQUAL(result, 156.0, "_vec_dot");
+    EXPECT_FLOAT_EQ(result, 156.0f, "_vec_dot");
 }
 
 int main(int argc, char** argv) {

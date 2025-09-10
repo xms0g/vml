@@ -1,5 +1,4 @@
 #include "mt.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -59,8 +58,8 @@ MTSuite* mtAddSuite(const char* name) {
     suite.name = name;
     suite.count = 0;
     suite.capacity = 2;
-    
     suite.tests = malloc(suite.capacity * sizeof(test_func));
+    
     if (!suite.tests) {
         fprintf(stderr, "malloc failed");
         return NULL;

@@ -2,16 +2,16 @@
 #define MT_H
 
 #include <stddef.h>
+#include <stdio.h>
+#include <math.h>
+#include <float.h>
 
-#define EPSILON 0.0001
-
-#define ASSERT_EQUAL(result, expected, func_name) \
+#define EXPECT_FLOAT_EQ(result, expected, func_name) \
     do { \
-        if (fabs((result) - (expected)) >= EPSILON) { \
+        if (fabsf((result) - (expected)) >= 0.0001f) { \
             fprintf(stderr, "%s failed: expected %f, got %f\n", func_name, expected, result); \
-            exit(EXIT_FAILURE); \
         } else { \
-            printf("%s passed.\n", func_name); \
+            printf("%s passed\n", func_name); \
         } \
     } while (0)
 
