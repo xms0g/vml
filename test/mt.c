@@ -86,6 +86,6 @@ void mtAddTest(MTSuite* suite, test_func fptr) {
 }
 
 void mtCleanupRegistry() {
-    free (registry.suites->tests);
-    free (registry.suites);
+    free(registry.suites->tests);
+    free(registry.suites);
 }

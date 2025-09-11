@@ -5,8 +5,8 @@
 #include "mt.h"
 #include "../include/vml.h"
 
-float v1[] = {3.0, 7.0, 9.0, 10.0};
-float v2[] = {2.0, 4.0, 8.0, 5.0};
+static float v1[] = {3.0, 7.0, 9.0, 10.0};
+static float v2[] = {2.0, 4.0, 8.0, 5.0};
 
 TEST_FUNC(_vec_add) {
     float result[4];
@@ -21,10 +21,10 @@ TEST_FUNC(_vec_add) {
 
 TEST_FUNC(_vec_add_odd) {
     float result[5];
-    float v1[] = {3.0, 7.0, 9.0, 10.0, 12.0};
-    float v2[] = {2.0, 4.0, 8.0, 5.0, 6.0};
+    float v_1[] = {3.0, 7.0, 9.0, 10.0, 12.0};
+    float v_2[] = {2.0, 4.0, 8.0, 5.0, 6.0};
     
-    _vec_add(result, v1, v2, 5);
+    _vec_add(result, v_1, v_2, 5);
 
     EXPECT_FLOAT_EQ(result[0], 5.0f, "_vec_add_odd");
     EXPECT_FLOAT_EQ(result[1], 11.0f, "_vec_add_odd");
@@ -42,7 +42,6 @@ TEST_FUNC(_vec_sub) {
     EXPECT_FLOAT_EQ(result[1], 3.0f, "_vec_sub");
     EXPECT_FLOAT_EQ(result[2], 1.0f, "_vec_sub");
     EXPECT_FLOAT_EQ(result[3], 5.0f, "_vec_sub");
-
 }
 
 TEST_FUNC(_vec_mul) {
@@ -145,9 +144,10 @@ TEST_FUNC(_vec_neg) {
 }
 
 TEST_FUNC(_vec_abs) {
-    float result[5];
+    float result[4];
+    float v[] = {-3.0, -7.0, -9.0, -10.0};
     
-    _vec_abs(result, v1, 4);
+    _vec_abs(result, v, 4);
 
     EXPECT_FLOAT_EQ(result[0], 3.0f, "_vec_abs");
     EXPECT_FLOAT_EQ(result[1], 7.0f, "_vec_abs");
@@ -185,27 +185,26 @@ TEST_FUNC(_vec_dot) {
 int main(int argc, char** argv) {
     mtInitRegistry();
 
-    MTSuite* testSuite = mtAddSuite("GeneralTestSuite");
     MTSuite* addSuite = mtAddSuite("AddSuite");
+    MTSuite* testSuite = mtAddSuite("GeneralTestSuite");
     
     mtAddTest(addSuite, TEST_FUNC_NAME(_vec_add));
     mtAddTest(addSuite, TEST_FUNC_NAME(_vec_add_odd));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sub));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_mul));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_div));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_max));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_min));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sadd));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_ssub));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_smul));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sdiv));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_neg));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_abs));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_norm));
-    // mtAddTest(testSuite, TEST_FUNC_NAME(_vec_len));
-    // mtAddTest(dotSuite, TEST_FUNC_NAME(_vec_dot));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sub));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_mul));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_div));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_max));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_min));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sadd));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_ssub));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_smul));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_sdiv));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_neg));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_abs));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_norm));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_len));
+    mtAddTest(testSuite, TEST_FUNC_NAME(_vec_dot));
 
-    
     printf("Running tests...\n");
     mtRunAllTests();
     
