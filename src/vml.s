@@ -24,18 +24,26 @@ global __vec_dot
 ; -------------------------------------------------------------
 __vec_add:
     xor r8, r8
-.l:
-    movups xmm0, [rsi + r8 * 4]
-    movups xmm1, [rdx + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
+    movups xmm1, [rdx + r8]
     addps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    movss xmm1, [rdx + r8]
+    addss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -48,18 +56,26 @@ __vec_add:
 ; -------------------------------------------------------------
 __vec_sub:
     xor r8, r8 
-.l:
-    movups xmm0, [rsi + r8 * 4]
-    movups xmm1, [rdx + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
+    movups xmm1, [rdx + r8]
     subps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    movss xmm1, [rdx + r8]
+    subss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -72,18 +88,26 @@ __vec_sub:
 ; -------------------------------------------------------------
 __vec_mul:
    xor r8, r8 
-.l:
-    movups xmm0, [rsi + r8 * 4]
-    movups xmm1, [rdx + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
+    movups xmm1, [rdx + r8]
     mulps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    movss xmm1, [rdx + r8]
+    mulss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -96,18 +120,26 @@ __vec_mul:
 ; -------------------------------------------------------------
 __vec_div:
     xor r8, r8 
-.l:
-    movups xmm0, [rsi + r8 * 4]
-    movups xmm1, [rdx + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
+    movups xmm1, [rdx + r8]
     divps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    movss xmm1, [rdx + r8]
+    divss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -120,18 +152,26 @@ __vec_div:
 ; -------------------------------------------------------------
 __vec_max:
     xor r8, r8 
-.l:
-    movups xmm0, [rsi + r8 * 4]
-    movups xmm1, [rdx + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
+    movups xmm1, [rdx + r8]
     maxps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    movss xmm1, [rdx + r8]
+    maxss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -144,18 +184,26 @@ __vec_max:
 ; -------------------------------------------------------------
 __vec_min:
     xor r8, r8 
-.l:
-    movups xmm0, [rsi + r8 * 4]
-    movups xmm1, [rdx + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
+    movups xmm1, [rdx + r8]
     minps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    movss xmm1, [rdx + r8]
+    minss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -170,17 +218,24 @@ __vec_sadd:
     xor r8, r8
     cvtsi2ss xmm1, rdx
     shufps xmm1, xmm1, 0x00         ;fill xmm1 with scalar
-.l:
-    movups xmm0, [rsi + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
     addps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    addss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -195,17 +250,24 @@ __vec_ssub:
     xor r8, r8
     cvtsi2ss xmm1, rdx
     shufps xmm1, xmm1, 0x00         ;fill xmm1 with scalar
-.l:
-    movups xmm0, [rsi + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
     subps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    subss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -220,17 +282,24 @@ __vec_smul:
     xor r8, r8
     cvtsi2ss xmm1, rdx
     shufps xmm1, xmm1, 0x00         ;fill xmm1 with scalar
-.l:
-    movups xmm0, [rsi + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
     mulps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits 
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    mulss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -247,17 +316,24 @@ __vec_sdiv:
     xorps xmm1, xmm1
     cvtsi2ss xmm1, rdx
     shufps xmm1, xmm1, 0x00 
-.l:
-    movups xmm0, [rsi + r8 * 4]
+.loop:
+    cmp rcx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
     divps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    divss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -268,22 +344,28 @@ __vec_sdiv:
 ; rdx = len                                                   ;                                             
 ; ------------------------------------------------------------
 __vec_neg:
-    mov rcx, rdx
     xor r8, r8
-    mov rdx, -1
-    cvtsi2ss xmm1, rdx
+    mov rcx, -1
+    cvtsi2ss xmm1, rcx
     shufps xmm1, xmm1, 0x00         ;fill xmm1 with -1
-.l:
-    movups xmm0, [rsi + r8 * 4]
+.loop:
+    cmp rdx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
     mulps xmm0, xmm1
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
-    sub rcx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
+    sub rdx, 4
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    mulss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rdx
+    jg .remainder
 .done:
     ret
 
@@ -294,18 +376,27 @@ __vec_neg:
 ; rdx = len                                                   ;                                             
 ; ------------------------------------------------------------
 __vec_abs:
-   xor r8, r8
-.l:
-    movups xmm0, [rsi + r8 * 4]
-    pabsd xmm0, xmm0
-    movq [rdi + r8 * 4], xmm0       ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + r8 * 4 + 8], xmm0   ;upper 64 bits
-    add r8, 4
+    xor r8, r8
+    pcmpeqd xmm1, xmm1          ; xmm1 = all 1s
+    psrld xmm1, 1             ; shift right → 0x7FFFFFFF in all lanes
+.loop:
+    cmp rdx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
+    andps xmm0, xmm1
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rdx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    andps xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rdx
+    jg .remainder
 .done:
     ret
 
@@ -326,20 +417,27 @@ __vec_norm:
     je .done
     movss xmm1, xmm0
     shufps xmm1, xmm1, 0x00
-    xor rcx, rcx
+    xor r8, r8
     pop rsi
     pop rdi
-.l:
-    movups xmm0, [rsi + rcx * 4]
+.loop:
+    cmp rdx, 4
+    jl .remainder
+
+    movups xmm0, [rsi + r8]
     divps xmm0, xmm1
-    movq [rdi + rcx * 4], xmm0      ;lower 64 bits
-    movhlps xmm0, xmm0              ;move high 64 bits to low 64 bits.
-    movq [rdi + rcx * 4 + 8], xmm0  ;upper 64 bits
-    add rcx, 4
+    movups [rdi + r8], xmm0 
+    add r8, 16                      ; 4 floats 16 bytes
     sub rdx, 4
-    je .done ; if len is zero, we are done
-    js .done ; if len is negative, we are done
-    jns .l ; if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rsi + r8]
+    divss xmm0, xmm1
+    movss [rdi + r8], xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rcx
+    jg .remainder
 .done:
     ret
 
@@ -349,20 +447,29 @@ __vec_norm:
 ; rsi = len                                                   ;                                               
 ; ------------------------------------------------------------
 __vec_len:
-   xor rcx, rcx
+   xor r8, r8
    xorps xmm1, xmm1
    xorps xmm0, xmm0
-.l:
-    movups xmm0, [rdi + rcx * 4]
+.loop:
+    cmp rsi, 4
+    jl .remainder
+    
+    movups xmm0, [rdi + r8]
     mulps xmm0, xmm0        ;square each element
     haddps xmm0, xmm0       ;horizontal add
     haddps xmm0, xmm0
     addss xmm1, xmm0
-    add rcx, 4
+    add r8, 16
     sub rsi, 4
-    je .done                ;if len is zero, we are done
-    js .done                ;if len is negative, we are done
-    jns .l                  ;if len is positive, go to loop
+    jg .loop
+    jmp .done
+.remainder:
+    movss xmm0, [rdi + r8]
+    mulss xmm0, xmm0
+    addss xmm1, xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rsi
+    jg .remainder         
 .done:
     sqrtps xmm0, xmm1       ;square root
     ret
@@ -374,22 +481,32 @@ __vec_len:
 ; rdx = len                                                    ;
 ; -------------------------------------------------------------
 __vec_dot:
-   xor rcx, rcx
+   xor r8, r8
    xorps xmm2, xmm2
    xorps xmm0, xmm0
    xorps xmm1, xmm1
-.l:
-    movups xmm0, [rdi + rcx * 4]
-    movups xmm1, [rsi + rcx * 4]
+.loop:
+    cmp rdx, 4
+    jl .remainder
+
+    movups xmm0, [rdi + r8]
+    movups xmm1, [rsi + r8]
     mulps xmm0, xmm1
     haddps xmm0, xmm0   ;horizontal add
     haddps xmm0, xmm0
     addss xmm2, xmm0
-    add rcx, 4
+    add r8, 16
     sub rdx, 4
-    je .done    ;if len is zero, we are done
-    js .done    ;if len is negative, we are done
-    jns .l      ;if len is positive, go to loop
+    jg .loop
+    jmp .remainder
+.remainder:
+    movss xmm0, [rdi + r8]
+    movss xmm1, [rsi + r8]
+    mulss xmm0, xmm1
+    addss xmm2, xmm0
+    add r8, 4                       ; 1 float 4 bytes
+    dec rdx
+    jg .remainder
 .done:
     movss xmm0, xmm2
     ret
