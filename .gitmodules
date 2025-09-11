@@ -1,3 +1,3 @@
-[submodule "libs/mt"]
-	path = libs/mt
-	url = git@github.com:xms0g/mt.git
+[submodule "libs/minic"]
+	path = libs/minic
+	url = git@github.com:xms0g/minic.git

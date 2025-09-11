@@ -7,8 +7,8 @@ TARGET_BENCH = benchmark
 
 all: $(TARGET_TEST) $(TARGET_BENCH)
 
-$(TARGET_TEST): $(SRC_TEST) ../libs/mt/src/mt.c
-	$(CC) $(CFLAGS) -o $@ $^ -I../include -I../libs/mt/include -L../build -lvml
+$(TARGET_TEST): $(SRC_TEST) ../libs/minic/src/minic.c
+	$(CC) $(CFLAGS) -o $@ $^ -I../include -I../libs/minic/include -L../build -lvml
 
 $(TARGET_BENCH): $(SRC_BENCH)
 	$(CC) $(CFLAGS) -o $@ $^ -I../include -L../build -lvml

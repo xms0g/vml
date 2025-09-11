@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
-#include "mt.h"
+#include "minic.h"
 #include "../include/vml.h"
 
 static float v1[] = {3.0, 7.0, 9.0, 10.0};
