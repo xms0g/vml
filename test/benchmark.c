@@ -2,9 +2,12 @@
 #include <time.h>
 #include "../include/vml.h"
 
+static double now() {
+    return (double)clock() / CLOCKS_PER_SEC * 1e6;
+}
+
 int main(int argc, char** argv) {
-    clock_t start;
-    double elapsed;
+    double start;
 
     float v1[] = {3.0, 7.0, 9.0, 10.0, 13.0};
     float v2[] = {2.0, 4.0, 8.0, 5.0, 6.0};
@@ -12,18 +15,16 @@ int main(int argc, char** argv) {
     
     unsigned int size = sizeof(v1)/sizeof(float);
     
-    start = clock();
+    start = now();
     for (unsigned i = 0; i < size; ++i) {
         result[i] = v1[i] + v2[i];
     }
-    elapsed = (double)((clock() - start)) / CLOCKS_PER_SEC;
 
-    printf("No SIMD: %fs\n", elapsed);
+    printf("No SIMD: %fs\n", now() - start);
 
     start = clock();
     _vec_add(result, v1, v2, size);
-    elapsed = (double)((clock() - start)) / CLOCKS_PER_SEC;
 
-    printf("SIMD: %fs\n", elapsed);
+    printf("SIMD: %fs\n", now() - start);
     return 0;
 }
