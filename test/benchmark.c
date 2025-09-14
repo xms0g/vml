@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#include "../include/vml.h"
+#include "vml.h"
 
 static double now() {
     return (double)clock() / CLOCKS_PER_SEC * 1e6;
