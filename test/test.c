@@ -183,32 +183,32 @@ TEST_FUNC(_vec_dot) {
 }
 
 int main(int argc, char** argv) {
-    mtInitRegistry();
+    minic_init_registry();
 
-    MTSuite* addSuite = mtAddSuite("AddSuite");
-    MTSuite* testSuite = mtAddSuite("GeneralTestSuite");
+    minic_suite* add_suite = minic_add_suite("AddSuite");
+    minic_suite* test_suite = minic_add_suite("GeneralTestSuite");
     
-    mtAddTest(addSuite, "_vec_add", TEST_FUNC_NAME(_vec_add));
-    mtAddTest(addSuite, "_vec_add_odd", TEST_FUNC_NAME(_vec_add_odd));
-    mtAddTest(testSuite, "_vec_sub", TEST_FUNC_NAME(_vec_sub));
-    mtAddTest(testSuite, "_vec_mul", TEST_FUNC_NAME(_vec_mul));
-    mtAddTest(testSuite, "_vec_div", TEST_FUNC_NAME(_vec_div));
-    mtAddTest(testSuite, "_vec_max", TEST_FUNC_NAME(_vec_max));
-    mtAddTest(testSuite, "_vec_min", TEST_FUNC_NAME(_vec_min));
-    mtAddTest(testSuite, "_vec_sadd", TEST_FUNC_NAME(_vec_sadd));
-    mtAddTest(testSuite, "_vec_ssub", TEST_FUNC_NAME(_vec_ssub));
-    mtAddTest(testSuite, "_vec_smul", TEST_FUNC_NAME(_vec_smul));
-    mtAddTest(testSuite, "_vec_sdiv", TEST_FUNC_NAME(_vec_sdiv));
-    mtAddTest(testSuite, "_vec_neg", TEST_FUNC_NAME(_vec_neg));
-    mtAddTest(testSuite, "_vec_abs", TEST_FUNC_NAME(_vec_abs));
-    mtAddTest(testSuite, "_vec_norm", TEST_FUNC_NAME(_vec_norm));
-    mtAddTest(testSuite, "_vec_len", TEST_FUNC_NAME(_vec_len));
-    mtAddTest(testSuite, "_vec_dot", TEST_FUNC_NAME(_vec_dot));
+    minic_add_test(add_suite, "_vec_add", TEST_FUNC_NAME(_vec_add));
+    minic_add_test(add_suite, "_vec_add_odd", TEST_FUNC_NAME(_vec_add_odd));
+    minic_add_test(test_suite, "_vec_sub", TEST_FUNC_NAME(_vec_sub));
+    minic_add_test(test_suite, "_vec_mul", TEST_FUNC_NAME(_vec_mul));
+    minic_add_test(test_suite, "_vec_div", TEST_FUNC_NAME(_vec_div));
+    minic_add_test(test_suite, "_vec_max", TEST_FUNC_NAME(_vec_max));
+    minic_add_test(test_suite, "_vec_min", TEST_FUNC_NAME(_vec_min));
+    minic_add_test(test_suite, "_vec_sadd", TEST_FUNC_NAME(_vec_sadd));
+    minic_add_test(test_suite, "_vec_ssub", TEST_FUNC_NAME(_vec_ssub));
+    minic_add_test(test_suite, "_vec_smul", TEST_FUNC_NAME(_vec_smul));
+    minic_add_test(test_suite, "_vec_sdiv", TEST_FUNC_NAME(_vec_sdiv));
+    minic_add_test(test_suite, "_vec_neg", TEST_FUNC_NAME(_vec_neg));
+    minic_add_test(test_suite, "_vec_abs", TEST_FUNC_NAME(_vec_abs));
+    minic_add_test(test_suite, "_vec_norm", TEST_FUNC_NAME(_vec_norm));
+    minic_add_test(test_suite, "_vec_len", TEST_FUNC_NAME(_vec_len));
+    minic_add_test(test_suite, "_vec_dot", TEST_FUNC_NAME(_vec_dot));
 
     printf("Running tests...\n");
-    mtRunAllTests();
+    minic_run_all_tests();
     
-    mtCleanupRegistry();
+    minic_cleanup_registry();
 
     return 0;
 }

@@ -2,8 +2,7 @@
 #define VML_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 extern void _vec_add(float* result, float* v1, float* v2, int len);         // v1 + v2
 extern void _vec_sub(float* result, float* v1, float* v2, int len);         // v1 - v2
