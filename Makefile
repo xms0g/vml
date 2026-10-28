@@ -1,6 +1,6 @@
 CC=clang
 ASM=nasm
-OBJS=./build/vml.s.o
+OBJS=./build/vml.asm.o
 OS := $(shell uname -s)
 
 ifeq ($(OS), Darwin)
@@ -15,11 +15,11 @@ endif
 
 all: ./build/$(LIB)
 
-./build/$(LIB): ./build/vml.s.o
-	$(CC) ./build/vml.s.o $(CFLAGS) -o ./build/$(LIB)
+./build/$(LIB): ./build/vml.asm.o
+	$(CC) ./build/vml.asm.o $(CFLAGS) -o ./build/$(LIB)
 
-./build/vml.s.o: ./src/vml.s
-	$(ASM) $(AFLAGS) ./src/vml.s -o ./build/vml.s.o
+./build/vml.asm.o: ./src/vml.asm
+	$(ASM) $(AFLAGS) ./src/vml.asm -o ./build/vml.asm.o
 
 clean:
 	rm -rf ./build/$(LIB) $(OBJS)
